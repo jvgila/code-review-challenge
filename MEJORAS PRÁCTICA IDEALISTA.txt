@@ -1,0 +1,41 @@
+
+                                                                                                                     CODE-REVIEW-CHALLENGE (JAVIER VELARDE GILA).
+
+
+* Mejoraría el empleo de Colección de Elementos en Java utilizados en los Servicios y su Implementación en el proyecto: https://github.com/idealista/code-review-challenge/ sustituyendo las listas utilizadas en los Servicios y su Implementación:
+
+   - List<PublicAd> findPublicAds();
+   - List<QualityAd> findQualityAds();
+
+por el manejo más eficiente de implementar con el uso de tabla hash y ordenando los elementos con TreeSet<> como ejemplo de implementación:
+                                                          
+   - TreeSet<PublicAd> publicity;
+   - TreeSet<QualityAd> quality 
+
+Con la peculiaridad de que TreeSet admite elementos que NO estén repetidos de forma única y ordenada (Ejemplo Publicidad de Anuncios - PublicAd y Calidad de Anuncios - QualityAd):
+
+   @Override
+   public int compareTo(PublicAd p) {
+      // TODO Auto-generated method stub
+      return 1;
+   }              
+
+
+   @Override
+   public int compareTo(QualityAd q) {
+      // TODO Auto-generated method stub
+      return 1;
+   }                 
+
+* Los Value Objects nos permiten encapsular elementos de nuestro dominio que representan un valor por sí mismos, hablamos de los siguientes valores:
+
+      private Integer id;
+      private String typology;
+      private String description;
+      private List<Integer> pictures; ---> Sustituible por TreeSet<Integer> pictures;
+      private Integer houseSize;
+      private Integer gardenSize;
+      private Integer score;
+      private Date irrelevantSince;  
+
+Y de ésta forma los value objects (VO) utilizados en la aplicación de IDEALISTA, nos permiten modelar los valores de nuestra aplicación que no representan una entidad por sí mismos representando un tipo de valor dentro de nuestra aplicación, pero sin tener identidad alguna como el valor de un "Artículo en una compra", ó de un "Usuario en acceso de una Aplicación" como ejemplos, y sin ocupar memoria, ya que el VO (Value Object) actúa de contenedor, no de valor.                      
